@@ -1,0 +1,68 @@
+PETAL GARDEN
+
+On your Mac
+-----------
+Double-click index.html to open the Elm game in your browser. No installation
+or internet connection is needed. Keep the elm folder, style.css and icon.svg
+alongside it. The former standalone JavaScript game has been removed.
+
+On your iPhone (same trusted Wi-Fi network)
+------------------------------------------
+1. On your Mac, open Terminal and run:
+   cd ~/flower-garden
+   python3 -m http.server 8765 --bind 0.0.0.0
+2. Find your Mac's Wi-Fi IP address in System Settings > Wi-Fi > Details > TCP/IP.
+3. On your iPhone, open Safari and visit http://YOUR-MAC-IP:8765
+4. Leave the Terminal running while you play. Press Control-C to stop sharing.
+
+This exposes only this folder, but any device able to reach your Mac on that
+network could access it. Use a trusted home network; do not forward the port
+on your router. A firewall or managed network may prevent the connection.
+Playing over Wi-Fi requires your Mac to stay awake.
+
+For access without the Mac, the folder can be hosted as a static website over
+HTTPS. Nothing has been uploaded or published automatically.
+
+How to play
+-----------
+Place the current flower on an empty patch. Match three or more outer petal
+colours in a horizontal or vertical line. No swapping, gravity or timer.
+Layered blooms reveal their inner colour after a match, potentially creating
+a cascade. Crossed matches affect each flower once per cascade step.
+Butterflies recolour outer petals. Spades move a flower to an empty patch.
+Tools may be skipped, but flowers cannot.
+
+Each level has a finite batch of pieces. The board carries into the next
+level, with more colours and layered blooms. New gardens start with 12 stones.
+At each level transition, the stone target rises to 14, 16 and 18 at levels
+2, 3 and 4, then drops by one per level back to 12 at level 10.
+Stones grow in fixed wedges from the corners along the edges, leaving the
+central garden connected. Only empty patches in that level's border pattern
+become stones; occupied positions are skipped, never replaced or moved inward.
+Later levels retract the wedges in reverse order to reopen the board.
+After level 14, layered blooms become more frequent, reaching 90% of generated
+flowers at level 28. The stone border stays at 12.
+The game ends when the current piece is a flower and there is no empty patch.
+Previously saved gardens keep their layout until the next level transition.
+Choose New garden to try the 12-stone opening immediately.
+
+Scores: 10 points per matched flower per cascade step, multiplied by that
+step's number. Completing a level adds 100 times the completed level number.
+Progress and best score save locally in this browser where permitted.
+Private browsing, clearing website data or changing the address/browser can
+remove or separate your saved game. Mac and iPhone saves are independent.
+
+About this version
+------------------
+This is an independent, Flowerz-inspired implementation with original SVG art
+and synthesised sound. It does not include Microsoft's code, artwork or audio.
+It is not an exact reproduction: original level layouts, scoring and piece
+distribution could not be verified, so these are newly designed.
+
+Development
+-----------
+The maintained source is in elm/src. Elm handles rules and UI; elm/interop.js
+provides browser storage, dialogs and synthesised audio. The compiled elm.js
+is required to run the Elm application in a browser; it is not a second game.
+See elm/README.txt for build and test commands. Old JavaScript saves can still
+be explicitly imported if they exist in this browser at the same origin.
